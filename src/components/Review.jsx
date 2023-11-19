@@ -1,21 +1,26 @@
 import React from 'react';
-
+import { FaQuoteRight } from 'react-icons/fa';
 const Review = ({ id, name, job, image, text }) => {
 	return (
 		<article>
 			<section>
-				<img
-					src={image}
-					alt={name}
-				/>
-				<span>,,</span>
+				<div className='img-container'>
+					<img
+						className='person-img'
+						src={image}
+						alt={name}
+					/>
+					<span className='quote-icon'>
+						<FaQuoteRight />
+					</span>
+				</div>
 			</section>
 			<section>
-				<h1>{name}</h1>
-				<h2>{job && job.toUpperCase()}</h2>
+				<h4 className='author'>{name}</h4>
+				<h2 className='job'>{job.toUpperCase()}</h2>
 			</section>
 			<section>
-				<p>{text}</p>
+				<p className='info'>{text}</p>
 			</section>
 		</article>
 	);

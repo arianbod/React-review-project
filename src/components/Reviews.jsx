@@ -3,9 +3,9 @@ import Review from './Review';
 
 const Reviews = (props) => {
 	return (
-		<main>
+		<>
 			<Review {...props} />
-		</main>
+		</>
 	);
 };
 
