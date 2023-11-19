@@ -12,7 +12,39 @@ const App = () => {
 
 	// State for tracking the active review index
 	const [activeIndexState, setActiveIndexState] = useState(0);
+	const numberValidator = (number) => {
+		if (number > dataState.length - 1) {
+			return 0;
+		}
+		if (number < 0) {
+			return dataState.length - 1;
+		}
+		return number;
+	};
+	const pervPerson = () => {
+		setActiveIndexState((activeIndexState) => {
+			const newIndex = activeIndexState - 1;
+			return numberValidator(newIndex);
+		});
+	};
+	const nextPerson = () => {
+		setActiveIndexState((activeIndexState) => {
+			const newIndex = activeIndexState + 1;
+			return numberValidator(newIndex);
+		});
 
+		// setActiveIndexState(activeIndexState + 1);
+	};
+	const surprise = () => {
+		setActiveIndexState((activeIndexState) => {
+			// Generate a random index and set it as the active index
+			random = Math.floor(Math.random() * dataState.length);
+			if (random == activeIndexState) {
+				return numberValidator(random + 1);
+			}
+			return numberValidator(random);
+		});
+	};
 	return (
 		<main>
 			<article className='review'>
@@ -25,31 +57,23 @@ const App = () => {
 					{activeIndexState > 0 && (
 						<button
 							className='btn'
-							onClick={() => setActiveIndexState(activeIndexState - 1)}>
+							onClick={pervPerson}>
 							<IoIosArrowBack />
 						</button>
 					)}
 
 					{/* Forward button, shown only if the active index is less than the length of dataState - 1 */}
-					{activeIndexState < dataState.length - 1 && (
-						<button
-							className='btn'
-							onClick={() => setActiveIndexState(activeIndexState + 1)}>
-							<IoIosArrowForward />
-						</button>
-					)}
+
+					<button
+						className='btn'
+						onClick={nextPerson}>
+						<IoIosArrowForward />
+					</button>
 
 					{/* Random button for displaying a random review */}
 					<button
 						className='btn'
-						onClick={() =>
-							setActiveIndexState(() => {
-								// Generate a random index and set it as the active index
-								random = Math.floor(Math.random() * dataState.length);
-								console.log(random); // Log the random index for debugging
-								return random;
-							})
-						}>
+						onClick={surprise}>
 						Surprise Me
 					</button>
 				</div>
